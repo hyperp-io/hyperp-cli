@@ -4,7 +4,7 @@
 CREDENTIALS_FILE="$HOME/.hyperp/credentials"
 
 # Define the API URL
-API_URL="https://api.hyperp.io"
+API_URL="https://qfs2hbn1pl.execute-api.us-east-1.amazonaws.com/login"
 
 # Function to log in and save credentials
 login() {

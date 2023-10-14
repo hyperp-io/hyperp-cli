@@ -14,14 +14,8 @@ install_dependency() {
   local dependency="$1"
   if ! command -v "$dependency" &>/dev/null; then
     echo "Installing $dependency..."
-    if [[ "$dependency" == "yaml2json" ]]; then
-      # Install yaml2json tool (example installation, please adjust as needed)
-      # For Ubuntu/Debian systems, you can use 'apt-get' to install 'yq'
+    if [[ "$dependency" == "jq" ]]; then
       wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\ chmod +x /usr/bin/yq
-    elif [[ "$dependency" == "jq" ]]; then
-      # Install jq tool (example installation, please adjust as needed)
-      # For Ubuntu/Debian systems, you can use 'apt-get' to install 'jq'
-      sudo apt-get install -y jq
     fi
   else
     echo "$dependency is already installed."
