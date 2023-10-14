@@ -33,7 +33,7 @@ login() {
   # Perform the login request and save credentials
   local response
   response=$(curl -s -X POST -H "Content-Type: application/json" -d "{\"email\":\"$email\",\"password\":\"$password\"}" "$API_URL/login")
-  echo "login response: $resonse"
+  echo "login response: $response"
   if [[ "$response" == *"authentication_key"* ]]; then
     echo "$response" > "$CREDENTIALS_FILE"
     echo "Login successful. Credentials saved to $CREDENTIALS_FILE"
