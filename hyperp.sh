@@ -53,7 +53,22 @@ login() {
 
 # Function to convert YAML to JSON and send a request
 create() {
-  local config_file="myconfig.yaml"
+  local config_file=""
+
+  # Parse command-line arguments
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -f | --file)
+        config_file="$2"
+        shift
+        ;;
+      *)
+        echo "Usage: hyperp create -f /path/to/config.yaml"
+        exit 1
+        ;;
+    esac
+    shift
+  done
 
   # Check if the credentials file exists
   if [ ! -f "$CREDENTIALS_FILE" ]; then
@@ -64,7 +79,11 @@ create() {
   # Parse the authentication key from the credentials file
   local auth_key
   auth_key=$(jq -r '.authentication_key' < "$CREDENTIALS_FILE")
-
+  # Ensure the config file exists
+  if [ ! -f "$config_file" ]; then
+    echo "The specified config file does not exist."
+    exit 1
+  fi
   # Convert YAML to JSON
   json_data=$(yq eval . "$config_file")
 
