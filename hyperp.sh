@@ -58,7 +58,7 @@ create() {
   auth_key=$(jq -r '.authentication_key' < "$CREDENTIALS_FILE")
 
   # Convert YAML to JSON
-  json_data=$(yaml2json "$config_file")
+  json_data=$(yq eval . "$config_file")
 
   # Send a request with the authentication key in the header
   local response

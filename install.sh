@@ -17,7 +17,7 @@ install_dependency() {
     if [[ "$dependency" == "yaml2json" ]]; then
       # Install yaml2json tool (example installation, please adjust as needed)
       # For Ubuntu/Debian systems, you can use 'apt-get' to install 'yq'
-      sudo apt-get install -y yq
+      wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\ chmod +x /usr/bin/yq
     elif [[ "$dependency" == "jq" ]]; then
       # Install jq tool (example installation, please adjust as needed)
       # For Ubuntu/Debian systems, you can use 'apt-get' to install 'jq'
