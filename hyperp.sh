@@ -32,8 +32,8 @@ login() {
 
   # Perform the login request and save credentials
   local response
-  response=$(curl -s -X POST -d "email=$email&password=$password" "$API_URL/login")
-  echo "response: $resonse"
+  response=$(curl -s -X POST -H "Content-Type: application/json" -d "{\"email\":\"$email\",\"password\":\"$password\"}" "$API_URL/login")
+  echo "login response: $resonse"
   if [[ "$response" == *"authentication_key"* ]]; then
     echo "$response" > "$CREDENTIALS_FILE"
     echo "Login successful. Credentials saved to $CREDENTIALS_FILE"
@@ -62,7 +62,7 @@ create() {
 
   # Send a request with the authentication key in the header
   local response
-  response=$(curl -s -X POST -H "Authorization: Bearer $auth_key" -d "$json_data" "$API_URL/create")
+  response=$(curl -s -X POST  -H "Content-Type: application/json" -H "Authorization: Bearer $auth_key" -d "$json_data" "$API_URL/create")
 
   # Handle the response as needed
   echo "$response"
