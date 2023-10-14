@@ -4,7 +4,7 @@
 INSTALL_DIR="/usr/local/bin"
 
 # URL to the 'hyperp' script
-HYPERP_SCRIPT_URL="https://raw.githubusercontent.com/yourusername/yourrepository/hyperp.sh"
+HYPERP_SCRIPT_URL="https://raw.githubusercontent.com/hyperp-io/hyperp-cli/master/hyperp.sh"
 
 # Define a list of necessary dependencies
 DEPENDENCIES=("yaml2json" "jq")
