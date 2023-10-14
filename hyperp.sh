@@ -38,6 +38,7 @@ login() {
 
    # Check if the login was successful
   if [[ "$response" == *"data"* && "$response" == *"auth"* ]]; then
+    mkdir -p "$HOME/.hyperp"
     # Extract the authentication key from the response
     auth_key=$(echo "$response" | jq -r '.data.auth')
     
