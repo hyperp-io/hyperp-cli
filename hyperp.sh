@@ -34,9 +34,16 @@ login() {
   local response
   response=$(curl -s -X POST -H "Content-Type: application/json" -d "{\"email\":\"$email\",\"password\":\"$password\"}" "$API_URL/login")
   echo "login response: $response"
-  if [[ "$response" == *"authentication_key"* ]]; then
-    echo "$response" > "$CREDENTIALS_FILE"
-    echo "Login successful. Credentials saved to $CREDENTIALS_FILE"
+
+
+   # Check if the login was successful
+  if [[ "$response" == *"data"* && "$response" == *"auth"* ]]; then
+    # Extract the authentication key from the response
+    auth_key=$(echo "$response" | jq -r '.data.auth')
+    
+    # Save the authentication key to the credentials file
+    echo "{\"authentication_key\":\"$auth_key\"}" > "$CREDENTIALS_FILE"
+    echo "Login successful. Authentication key saved to $CREDENTIALS_FILE"
   else
     echo "Login failed. Please check your credentials."
     exit 1
