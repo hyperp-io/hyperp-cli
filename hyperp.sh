@@ -86,7 +86,7 @@ create() {
   fi
   # Convert YAML to JSON
   json_data=$(yq eval . "$config_file")
-
+  echo "json data: $json_data"
   # Send a request with the authentication key in the header
   local response
   response=$(curl -s -X POST  -H "Content-Type: application/json" -H "Authorization: Bearer $auth_key" -d "$json_data" "$API_URL/create")
