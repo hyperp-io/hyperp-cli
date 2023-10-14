@@ -8,14 +8,14 @@ API_URL="https://qfs2hbn1pl.execute-api.us-east-1.amazonaws.com/login"
 
 # Function to log in and save credentials
 login() {
-  local username=""
+  local email=""
   local password=""
 
   # Parse command-line arguments
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -u | --username)
-        username="$2"
+      -e | --email)
+        email="$2"
         shift
         ;;
       -p | --password)
@@ -23,7 +23,7 @@ login() {
         shift
         ;;
       *)
-        echo "Usage: hyperp login -u username -p password"
+        echo "Usage: hyperp login -e email -p password"
         exit 1
         ;;
     esac
@@ -32,7 +32,7 @@ login() {
 
   # Perform the login request and save credentials
   local response
-  response=$(curl -s -X POST -d "username=$username&password=$password" "$API_URL/login")
+  response=$(curl -s -X POST -d "email=$email&password=$password" "$API_URL/login")
 
   if [[ "$response" == *"authentication_key"* ]]; then
     echo "$response" > "$CREDENTIALS_FILE"
